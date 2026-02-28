@@ -3,7 +3,7 @@
 /**
  * main - Entry point
  *
- * Description: Prints the lowercase alphabet using putchar only twice
+ * Description: Prints lowercase then uppercase alphabet using putchar
  *
  * Return: Always 0 (Success)
  */
@@ -15,10 +15,10 @@ int main(void)
 	{
 		putchar(letter);
 	}
-	 for (letter = 'A'; letter <= 'Z'; letter++)
-        {
-                putchar(letter);
-        }
+	for (letter = 'A'; letter <= 'Z'; letter++)
+	{
+		putchar(letter);
+	}
 	putchar('\n');
 
 	return (0);
