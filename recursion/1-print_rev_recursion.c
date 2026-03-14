@@ -12,7 +12,7 @@ void _print_rev_recursion(char *s)
 	{
 		return;  /* Start unwinding */
 	}
-	
+
 	_print_rev_recursion(s + 1);  /* Recursive call with next character */
 	_putchar(*s);  /* Print current character after recursion returns */
 }
