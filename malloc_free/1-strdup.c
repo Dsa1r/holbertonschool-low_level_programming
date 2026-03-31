@@ -12,12 +12,14 @@
 char *_strdup(char *str)
 {
 	char *dub;
-	unsigned int i, leng;
+	unsigned int i;
+	unsigned int leng = 1;
 
 	if (str == NULL)
 		return (NULL);
 
-	leng = strlen(str) + 1;
+	for (i = 0 ; str[i] == '\0' ; i++)
+		leng++;
 
 	dub = malloc(leng * sizeof(char));
 
