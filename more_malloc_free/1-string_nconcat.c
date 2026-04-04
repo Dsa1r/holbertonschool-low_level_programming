@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * string_nconcat - concatenates s1 with first n bytes of s2
@@ -17,11 +16,14 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	unsigned int len1 = 0, len2 = 0, i, j;
 
 	if (s1 != NULL)
-		len1 = strlen(s1);
-	if (s2 != NULL)
-		len2 = strlen(s2);
+		while (s1[len1] != '\0')
+			len1++;
 
-	if (n >= len2)
+	if (s2 != NULL)
+		while (s2[len2] != '\0')
+			len2++;
+
+	if (n > len2)
 		n = len2;
 
 	concat = malloc(len1 + n + 1);
