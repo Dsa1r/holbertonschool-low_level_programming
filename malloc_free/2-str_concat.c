@@ -2,45 +2,53 @@
 #include <stdlib.h>
 
 /**
- * str_concat - kkk
+ * str_concat - concatenates two strings
+ * @s1: first string
+ * @s2: second string
  *
- *
+ * Return: pointer to new string, or NULL on failure
  */
-
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int i, j = 0;
-	unsigned int leng = 1;
-	char *cont;
-
-	if (s1 == NULL && s2 == NULL)
-		return "";
+	char *res;
+	unsigned int i, j, len1 = 0, len2 = 0;
 
 	if (s1 != NULL)
-		for (i = 0; s1[i] != '\0' ; i++)
-		leng++;
+		while (s1[len1] != '\0')
+			len1++;
 
 	if (s2 != NULL)
-		for (i = 0; s2[i] != '\0' ; i++)
-		leng++;
+		while (s2[len2] != '\0')
+			len2++;
 
-	cont = malloc(leng * sizeof(char));
+	res = malloc((len1 + len2 + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
 
-	if (cont == NULL)
-		return(NULL);
-i = 0;
-	while(s1 != NULL && s1[i] != '\0')
+	i = 0;
+	if (s1 != NULL)
 	{
-		cont[i] = s1[i];
-		i++;
+		j = 0;
+		while (s1[j] != '\0')
+		{
+			res[i] = s1[j];
+			i++;
+			j++;
+		}
 	}
 
-	while (s2 != NULL && s2[j] != '\0')
+	if (s2 != NULL)
 	{
-		cont[i] = s2[j];
-		j++;
-		i++;
+		j = 0;
+		while (s2[j] != '\0')
+		{
+			res[i] = s2[j];
+			i++;
+			j++;
+		}
 	}
 
-	return cont;
+	res[i] = '\0';
+
+	return (res);
 }
