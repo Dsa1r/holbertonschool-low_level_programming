@@ -20,31 +20,29 @@ void print_all(const char * const format, ...)
 
 	while (format && format[i])
 	{
-		if (format[i] == 'c')
+		if (format[i] == 'c' || format[i] == 'i')
 		{
-			printf("%s%c", sep, va_arg(args, int));
+			if (format[i] == 'c')
+				printf("%s%c", sep, va_arg(args, int));
+			if (format[i] == 'i')
+				printf("%s%d", sep, va_arg(args, int));
 			sep = ", ";
 		}
-		if (format[i] == 'i')
-		{
-			printf("%s%d", sep, va_arg(args, int));
-			sep = ", ";
-		}
-		while (format[i] == 'f')
-		{
-			printf("%s%f", sep, va_arg(args, double));
-			sep = ", ";
-			break;
-		}
-		while (format[i] == 's')
+
+		if (format[i] == 'f' || format[i] == 's')
 		{
 			str = va_arg(args, char *);
-			if (str == NULL)
-				str = "(nil)";
-			printf("%s%s", sep, str);
+			if (format[i] == 'f')
+				printf("%s%f", sep, *(double *)&str);
+			if (format[i] == 's')
+			{
+				if (str == NULL)
+					str = "(nil)";
+				printf("%s%s", sep, str);
+			}
 			sep = ", ";
-			break;
 		}
+
 		i++;
 	}
 
