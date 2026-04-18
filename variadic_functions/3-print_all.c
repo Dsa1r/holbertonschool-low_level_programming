@@ -7,42 +7,69 @@
  *
  * Return: nothing
  */
+
+typedef struct format_op
+{
+	char *op;
+	void (*f)(va_list *);
+} format_op_t;
+
+/* helper functions */
+void print_char(va_list *args)
+{
+	printf("%c", va_arg(*args, int));
+}
+
+void print_int(va_list *args)
+{
+	printf("%d", va_arg(*args, int));
+}
+
+void print_float(va_list *args)
+{
+	printf("%f", va_arg(*args, double));
+}
+
+void print_string(va_list *args)
+{
+	char *s = va_arg(*args, char *);
+
+	if (s == NULL)
+		s = "(nil)";
+	printf("%s", s);
+}
+
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	unsigned int i;
-	char *sep;
-	char *str;
+	unsigned int i = 0, j;
+	char *sep = "";
 
-	i = 0;
-	sep = "";
+	format_op_t ops[] = {
+		{"c", print_char},
+		{"i", print_int},
+		{"f", print_float},
+		{"s", print_string},
+		{NULL, NULL}
+	};
+
 	va_start(args, format);
 
 	while (format && format[i])
 	{
-		if (format[i] == 'c' || format[i] == 'i')
-		{
-			if (format[i] == 'c')
-				printf("%s%c", sep, va_arg(args, int));
-			if (format[i] == 'i')
-				printf("%s%d", sep, va_arg(args, int));
-			sep = ", ";
-		}
+		j = 0;
 
-		if (format[i] == 'f' || format[i] == 's')
+		while (ops[j].op)
 		{
-			str = va_arg(args, char *);
-			if (format[i] == 'f')
-				printf("%s%f", sep, *(double *)&str);
-			if (format[i] == 's')
+			if (format[i] == ops[j].op[0])
 			{
-				if (str == NULL)
-					str = "(nil)";
-				printf("%s%s", sep, str);
+				printf("%s", sep);
+				ops[j].f(&args);
+				sep = ", ";
+				break;
 			}
-			sep = ", ";
+			j++;
 		}
-
 		i++;
 	}
 
