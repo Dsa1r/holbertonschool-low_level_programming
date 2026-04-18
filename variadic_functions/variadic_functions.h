@@ -2,11 +2,6 @@
 #define VARIADIC_FUNCTIONS_H
 
 #include <stdarg.h>
-typedef struct format_op
-{
-	char *op;
-	void (*f)(va_list *);
-} format_op_t;
 
 /* Prototype */
 int sum_them_all(const unsigned int n, ...);
