@@ -16,6 +16,13 @@ int _strlen(char *s)
 		i++;
 	return (i);
 }
+
+/**
+ * print_list - returns the length of a string
+ * @h: the string whose length to check
+ *
+ * Return: integer length of string
+ */
 size_t print_list(const list_t *h)
 {
 	size_t i = 0;
