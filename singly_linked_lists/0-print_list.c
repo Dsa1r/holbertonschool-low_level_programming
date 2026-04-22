@@ -16,7 +16,6 @@ int _strlen(char *s)
 		i++;
 	return (i);
 }
-
 size_t print_list(const list_t *h)
 {
 	size_t i = 0;
